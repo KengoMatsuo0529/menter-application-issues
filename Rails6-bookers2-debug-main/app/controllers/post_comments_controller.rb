@@ -2,9 +2,9 @@ class PostCommentsController < ApplicationController
   
   def create
     user = current_user
-    book_detail = Book.find(params[:bookid])
+    book_detail = Book.find(params[:book_id])
     comment = user.post_comments.new(post_comment_params)
-    comment.book_id = book.id
+    comment.book_id = book_detail.id
     comment.save
     redirect_to request.referer
   end
