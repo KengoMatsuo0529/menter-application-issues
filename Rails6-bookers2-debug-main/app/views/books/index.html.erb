@@ -1,6 +1,16 @@
+
+
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-3'>
+      <% if user_signed_in? %>
+        <%= form_with scope: :search, url: user_search_path(@user,@book), method: :get, local: true do |f| %>
+          <%= f.text_field :word %>
+          <%= select_tag "range", options_for_select([["User", "1"], ["Book", "2"]]) %>
+          <%= select_tag "search", options_for_select([["完全一致", "perfect_match"], ["前方一致", "forward_match"], ["後方一致", "backward-match"], ["部分一致", "partial_match"]]) %>
+          <%= f.submit "検索" %>
+        <% end %>
+      <% end %>
       <h2>User info</h2>
       <%= render 'users/info', user: current_user %>
       <h2 class="mt-3">New book</h2>
