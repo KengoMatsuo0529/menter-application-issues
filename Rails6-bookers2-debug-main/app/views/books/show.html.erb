@@ -10,7 +10,7 @@
   		<h2>Book detail</h2>
   		<table class='table'>
   		  <tr>
-          <td><%= link_to(@book_detail.user) do %>
+          <td><%= link_to @book_detail.user do %>
             <%= image_tag @book_detail.user.get_profile_image, size:"100x100" %><br>
             <%= @book_detail.user.name %>
             <% end %>
@@ -19,17 +19,17 @@
           <td><%= @book_detail.body %></td>
           <% if @book_detail.user.id == current_user.id %>
             <td><%= link_to 'Edit', edit_book_path(@book_detail), class: "btn btn-sm btn-success edit_book_#{@book_detail.id}" %></td>
-            <td><%= link_to 'Destroy', book_path(@book_detail), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
+            <td><%= button_to 'Destroy', book_path(@book_detail), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
           <% if @book_detail.favorited_by?(current_user) %>
             <td>
-              <%= link_to book_favorite_path(@book_detail), method: :delete do %>
+              <%= button_to book_favorite_path(@book_detail), method: "delete" do %>
                 ♥<%= @book_detail.favorites.count %> いいね
               <% end %>
             </td>
           <% else %>
             <td>
-              <%= link_to book_favorite_path(@book_detail), method: :post do %>
+              <%= button_to book_favorite_path(@book_detail), method: :post do %>
                 ♡<%= @book_detail.favorites.count %> いいね
               <% end %>
             </td>

@@ -41,8 +41,8 @@
         <tr>
           <td><%= image_tag user.get_profile_image, fallback: "no-image-icon.jpg", size:"40x40" %></td>
           <td><%= user.name %></td>
-          <td>フォロー数：<%= user.follower.count %></td>
-          <td>フォロワー数：<%= user.followed.count %></td>
+          <td>フォロー数：<%= user.followings.count %></td>
+          <td>フォロワー数：<%= user.followers.count %></td>
   
           <td>
           <% if user_signed_in? && user != current_user %>

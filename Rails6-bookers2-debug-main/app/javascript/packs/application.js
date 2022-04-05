@@ -12,12 +12,10 @@ import "popper.js"
 import "bootstrap"
 import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application" 
-
-require("@rails/ujs").start()
-
-require("jquery-ujs").start()
-
+import "jquery-ujs"
+import "rails/ujs"
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+require("@rails/ujs").start()
