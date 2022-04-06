@@ -18,4 +18,4 @@ import "rails/ujs"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-require("@rails/ujs").start()
+

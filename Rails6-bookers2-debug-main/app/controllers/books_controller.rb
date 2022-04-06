@@ -38,10 +38,14 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update(book_params)
-      redirect_to book_path(@book), notice: "You have updated book successfully."
+    if @book.rate == 0
+      if @book.update(book_params)
+        redirect_to book_path(@book), notice: "You have updated book successfully."
+      else
+        render "edit"
+      end
     else
-      render "edit"
+      render "edit", notice "一度付けた評価は変更できません"
     end
   end
 
@@ -54,7 +58,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :user_id)
+    params.require(:book).permit(:title, :body, :user_id, :rate)
   end
   
   def correct_user
