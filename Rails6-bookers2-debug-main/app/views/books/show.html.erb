@@ -23,7 +23,7 @@
           <% end %>
           <% if @book_detail.favorited_by?(current_user) %>
             <td>
-              <%= button_to book_favorite_path(@book_detail), method: "delete" do %>
+              <%= button_to book_favorite_path(@book_detail), method: :delete do %>
                 ♥<%= @book_detail.favorites.count %> いいね
               <% end %>
             </td>
@@ -33,15 +33,15 @@
                 ♡<%= @book_detail.favorites.count %> いいね
               <% end %>
             </td>
-            <td>コメント数:<%= @book_detail.post_comments.count %></td>
           <% end %>
+          <td>コメント数:<%= @book_detail.post_comments.count %></td>
         </tr>
       </table>
       <div id="comments_area">
         <%= render "post_comments/post_comment", book_detail: @book_detail %>
       </div>
       <div class="col-md-8">
-        <%= form_with(model:[@book_detail, @post_comment], remote: true ) do |f| %>
+        <%= form_with(model:[@book_detail, @post_comment], local: false ) do |f| %>
           <%= f.text_area :comment %>
           <%= f.submit "送信" %>
         <% end %>
