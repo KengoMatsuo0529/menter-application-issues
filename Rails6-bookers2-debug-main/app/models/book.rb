@@ -17,7 +17,7 @@ class Book < ApplicationRecord
 
   def self.search(search,word)
     if search == "forward_search"
-      @book = Book.where("title LIKE?","#{word}%" )
+      @book = Book.where("title LIKE?", "#{word}%")
     elsif search == "backward_search"
       @book = Book.where("title LIKE?", "%#{word}")
     elsif search == "perfect_match"
@@ -27,5 +27,9 @@ class Book < ApplicationRecord
     else
       @book = Book.all
     end
+  end
+
+  def self.category_search(category)
+    Book.where(['category LIKE ?', "#{category}"])
   end
 end

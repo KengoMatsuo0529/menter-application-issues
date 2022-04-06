@@ -35,6 +35,7 @@
             </td>
           <% end %>
           <td>コメント数:<%= @book_detail.post_comments.count %></td>
+          <td>カテゴリー：<%= link_to @book_detail.category, category_search_path(category: @book_detail.category) %></td>
           <td>評価：<%= @book_detail.rate %></td>
         </tr>
       </table>

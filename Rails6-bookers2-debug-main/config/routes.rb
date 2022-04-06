@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get "home/about"=>"homes#about"
   get 'sort' => 'books#sort_book'
+  get 'category_search' => 'books#category_search'
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resource :favorite, only: [:create, :destroy]

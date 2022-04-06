@@ -1,12 +1,12 @@
 class BooksController < ApplicationController
-  
+
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update]
 
   def new
     @book = Book.new
   end
-  
+
   def show
     @book = Book.new
     @book_detail = Book.find(params[:id])
@@ -54,7 +54,7 @@ class BooksController < ApplicationController
     @book.destroy
     redirect_to books_path
   end
-  
+
   def sort_book
     if params[:book][:sort] == 'new'
       @books = Book.all.order(created_at: :DESC)
@@ -64,13 +64,17 @@ class BooksController < ApplicationController
       @books = Book.all
     end
   end
+  
+  def category_search
+    @books = Book.category_search(params[:category])
+  end
 
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :user_id, :rate)
+    params.require(:book).permit(:title, :body, :user_id, :rate, :category)
   end
-  
+
   def correct_user
     book = Book.find(params[:id])
     if current_user.id != book.user.id
