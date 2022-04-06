@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    @books = Book.all.order(rate: "DESC")
     @book = Book.new
     @users = User.all
     @user = current_user
@@ -45,7 +45,7 @@ class BooksController < ApplicationController
         render "edit"
       end
     else
-      render "edit", notice "一度付けた評価は変更できません"
+      redirect_to books_path, notice: "一度付けた評価は変更できません"
     end
   end
 
@@ -53,6 +53,16 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book.destroy
     redirect_to books_path
+  end
+  
+  def sort_book
+    if params[:book][:sort] == 'new'
+      @books = Book.all.order(created_at: :DESC)
+    elsif params[:book][:sort] == 'hi-rated'
+      @books = Book.all.order(rate: :DESC)
+    else
+      @books = Book.all
+    end
   end
 
   private

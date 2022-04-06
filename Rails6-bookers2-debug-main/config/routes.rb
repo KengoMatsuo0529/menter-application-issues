@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   get "home/about"=>"homes#about"
+  get 'sort' => 'books#sort_book'
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resource :favorite, only: [:create, :destroy]
